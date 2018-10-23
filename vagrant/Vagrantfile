@@ -19,30 +19,34 @@ Vagrant.configure(2) do |config|
     h.vm.network "private_network", ip: "192.168.135.10"
     h.vm.provision :shell, path: "add-ansible-user.sh" 
     h.vm.provision :shell, path: "generate-ansible-ssh-keys.sh" 
+    h.vm.synced_folder "../ansible", "/ansible", disabled: false,  owner: "ansible", group: "ansible"
   end
 
   config.vm.define "lb01" do |h|
     h.vm.network "private_network", ip: "192.168.135.101"
-    h.vm.provision :shell, inline: 'cat /vagrant/control.pub > /home/vagrant/.ssh/authorized_keys'
+    h.vm.provision :shell, path: "add-ansible-user.sh"
+    h.vm.provision :shell, inline: 'cat /vagrant/control.pub > /home/ansible/.ssh/authorized_keys'
     h.vm.hostname = "lb01"
   end
 
   config.vm.define "app01" do |h|
     h.vm.network "private_network", ip: "192.168.135.111"
-    h.vm.provision :shell, inline: 'cat /vagrant/control.pub > /home/vagrant/.ssh/authorized_keys'
+    h.vm.provision :shell, path: "add-ansible-user.sh"
+    h.vm.provision :shell, inline: 'cat /vagrant/control.pub > /home/ansible/.ssh/authorized_keys'
     h.vm.hostname = "app01"
   end
 
   config.vm.define "app02" do |h|
     h.vm.network "private_network", ip: "192.168.135.112"
-    h.vm.provision :shell, inline: 'cat /vagrant/control.pub > /home/vagrant/.ssh/authorized_keys'
+    h.vm.provision :shell, path: "add-ansible-user.sh"
+    h.vm.provision :shell, inline: 'cat /vagrant/control.pub > /home/ansible/.ssh/authorized_keys'
     h.vm.hostname = "app02"
   end
 
   config.vm.define "db01" do |h|
     h.vm.network "private_network", ip: "192.168.135.121"
-    h.vm.provision :shell, inline: 'cat /vagrant/control.pub >> /home/vagrant/.ssh/authorized_keys'
+    h.vm.provision :shell, path: "add-ansible-user.sh"
+    h.vm.provision :shell, inline: 'cat /vagrant/control.pub >> /home/ansible/.ssh/authorized_keys'
     h.vm.hostname = "db01"
   end
 end
-
