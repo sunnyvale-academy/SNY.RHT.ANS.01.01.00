@@ -25,7 +25,7 @@
      become: true
      notify: restart apache2
    - name: setup python virtualenv
-     pip: requirements=/var/www/demo/requirements.txt virtualenv=/var/www/demo/.venv
+     pip: requirements=/var/www/demo/app/requirements.txt virtualenv=/var/www/demo/.venv
      become: true
      notify: restart apache2
   handlers: 
