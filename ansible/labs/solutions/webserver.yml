@@ -17,7 +17,7 @@
      notify: restart apache2
      become: true
    - name: copy demo app source
-     copy: src=demo/app dest=/var/www/demo mode=0755
+     copy: src=demo/app/ dest=/var/www/demo mode=0755
      become: true
      notify: restart apache2
    - name: copy apache conf
