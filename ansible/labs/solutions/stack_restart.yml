@@ -17,10 +17,10 @@
 - hosts: webserver
   become: true
   tasks:
-   - name: stop webserver
+   - name: start webserver
      service: name=apache2 state=started
 - hosts: loadbalancer
   become: true
   tasks:
-   - name: stop load balancer
+   - name: start load balancer
      service: name=nginx state=started
