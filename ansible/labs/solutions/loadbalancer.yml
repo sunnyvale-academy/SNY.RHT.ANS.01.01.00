@@ -4,3 +4,6 @@
    - name: install nginx
      apt: name=nginx state=present update_cache=true
      become: true
+   - name: start nginx
+     service: name=nginx state=started enabled=yes
+     become: true
