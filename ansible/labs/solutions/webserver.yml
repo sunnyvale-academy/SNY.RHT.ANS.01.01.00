@@ -21,7 +21,7 @@
      become: true
      notify: restart apache2
    - name: copy apache conf
-     copy: src=demo/demo_apache.conf dst=/etc/apache2/sites-available mode=0755
+     copy: src=demo/demo_apache.conf dest=/etc/apache2/sites-available mode=0755
      become: true
      notify: restart apache2
   handlers: 
