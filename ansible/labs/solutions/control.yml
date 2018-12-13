@@ -1,0 +1,8 @@
+---
+- hosts: control
+  tasks:
+   - name: install tools
+     apt: name={{item}} state=present update_cache=true
+     become: true
+     with_items:
+      - curl
