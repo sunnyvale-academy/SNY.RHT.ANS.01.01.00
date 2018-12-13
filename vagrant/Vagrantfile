@@ -20,8 +20,13 @@ Vagrant.configure(2) do |config|
     h.vm.provision "shell", path: "scripts/generate_ansible_ssh_keys.sh" 
     h.vm.provision "shell", path: "scripts/install_ansible.sh" 
     h.vm.provision "shell", path: "scripts/populate_inventory.sh" 
+    h.vm.provision "shell", path: "scripts/install_git.sh"
+    h.vm.provision "shell", path: "scripts/clone_git_repo.sh" 
     h.vm.synced_folder "../ansible", "/ansible", disabled: false,  owner: "1002", group: "1002"
-    h.vm.hostname = "control"
+    h.vm.hostname = "control01"
+    h.vm.provider :virtualbox do |vb|
+        vb.name = "control01"
+    end
   end
 
   config.vm.define "lb01" do |h|
@@ -29,6 +34,9 @@ Vagrant.configure(2) do |config|
     h.vm.provision :shell, path: "scripts/add_ansible_user.sh"
     h.vm.provision :shell, inline: 'cat /vagrant/control.pub > /home/ansible/.ssh/authorized_keys'
     h.vm.hostname = "lb01"
+    h.vm.provider :virtualbox do |vb|
+        vb.name = "lb01"
+    end
   end
 
   config.vm.define "app01" do |h|
@@ -36,6 +44,9 @@ Vagrant.configure(2) do |config|
     h.vm.provision :shell, path: "scripts/add_ansible_user.sh"
     h.vm.provision :shell, inline: 'cat /vagrant/control.pub > /home/ansible/.ssh/authorized_keys'
     h.vm.hostname = "app01"
+    h.vm.provider :virtualbox do |vb|
+        vb.name = "app01"
+    end
   end
 
   config.vm.define "app02" do |h|
@@ -43,6 +54,9 @@ Vagrant.configure(2) do |config|
     h.vm.provision :shell, path: "scripts/add_ansible_user.sh"
     h.vm.provision :shell, inline: 'cat /vagrant/control.pub > /home/ansible/.ssh/authorized_keys'
     h.vm.hostname = "app02"
+    h.vm.provider :virtualbox do |vb|
+        vb.name = "app02"
+    end
   end
 
   config.vm.define "db01" do |h|
@@ -50,5 +64,8 @@ Vagrant.configure(2) do |config|
     h.vm.provision :shell, path: "scripts/add_ansible_user.sh"
     h.vm.provision :shell, inline: 'cat /vagrant/control.pub >> /home/ansible/.ssh/authorized_keys'
     h.vm.hostname = "db01"
+    h.vm.provider :virtualbox do |vb|
+        vb.name = "db01"
+    end
   end
 end
