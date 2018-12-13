@@ -1,5 +1,5 @@
 [control]
-control ansible_connection=local
+control01 ansible_connection=local
 
 [loadbalancer]
 lb01
