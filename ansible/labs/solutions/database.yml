@@ -3,3 +3,4 @@
   tasks:
    - name: install mysql-server
      apt: name=mysql-server state=present
+     become: true
