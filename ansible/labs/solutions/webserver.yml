@@ -12,3 +12,9 @@
    - name: start apache2
      service: name=apache2 state=started enabled=yes
      become: true
+   - name: enable apache2 WSGI module
+     apache2_module: name=wsgi state=present
+     notify: restart apache2
+  handlers: 
+   - name: restart apache2
+     service: name=apache2 state=restarted
