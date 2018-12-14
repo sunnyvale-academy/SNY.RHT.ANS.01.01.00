@@ -7,3 +7,9 @@
    - name: start mysql-server
      service: name=mysql state=started enabled=true
      become: true
+   - name: configure mysql listen host
+     lineinfile: dest=/etc/mysql/my.cf regexp=^bind-address line="bind-address = 0.0.0.0"
+     notify: restart mysql
+  handlers:
+   - name: restart mysql
+     service: name=mysql state=restarted
