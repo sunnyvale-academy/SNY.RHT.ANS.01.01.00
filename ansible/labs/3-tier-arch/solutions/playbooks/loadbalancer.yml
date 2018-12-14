@@ -7,3 +7,20 @@
    - name: start nginx
      service: name=nginx state=started enabled=yes
      become: true
+   - name: configure nginx
+     template: src=../templates/nginx.conf.j2 dest=/etc/nginx/sistes-available/demo mode=0644
+     notify: restart nginx
+     become: true
+   - name: deactivate default nginx site 
+     file: path=/etc/nginx/sites-enabled/default state=absent
+     notify: restart nginx
+     become: true
+   - name: activate demo nginx site
+     file: src=/etc/nginx/sites-available/demo dest=/etc/nginx/sites-enabled/demo state=link
+     notify: restart nginx
+     become: true
+  handlers:
+   - name: restart nginx
+     service: name=nginx state=restarted
+     become: true
+     
