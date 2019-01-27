@@ -1,5 +1,32 @@
 #!/usr/bin/python
 
+DOCUMENTATION = '''
+---
+module: github_repo
+short_description: Manage your repos on Github
+'''
+
+EXAMPLES = '''
+- name: Create a github Repo
+  github_repo:
+    github_auth_key: "..."
+    name: "Hello-World"
+    username: "denismaggior8"
+    description: "This is your first repository"
+    private: yes
+    has_issues: no
+    has_wiki: no
+    has_downloads: no
+  register: result
+- name: Delete that repo 
+  github_repo:
+    username: "denismaggior8"
+    github_auth_key: "..."
+    name: "Hello-World"
+    state: absent
+  register: result
+'''
+
 from ansible.module_utils.basic import *
 import requests
 
