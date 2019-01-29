@@ -1,2 +1,23 @@
 ---
 # tasks file for mysql
+- name: install mysql-server
+  apt: name=mysql-server state=present update_cache=true
+  become: true
+- name: start mysql-server
+  service: name=mysql state=started enabled=true
+  become: true
+- name: configure mysql listen host
+  lineinfile: dest=/etc/mysql/my.cnf regexp=^bind-address line="bind-address = 0.0.0.0"
+  become: true
+  notify: restart mysql
+- name: install tools
+  apt: name={{item}} state=present update_cache=true
+  with_items:
+   - python-mysqldb
+  become: true
+- name: create demo database
+  mysql_db: name=demo state=present login_user=root login_password='' login_host=localhost
+  become: true
+- name: create demo user
+  mysql_user: name=demo state=present password=demo priv=demo.*:ALL host='%'
+  become: true

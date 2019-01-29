@@ -1,2 +1,34 @@
 ---
 # tasks file for apache2
+- name: install apache2
+  apt: name={{item}} state=present update_cache=true
+  become: true
+  with_items:
+   - apache2
+   - libapache2-mod-wsgi
+   - python-pip
+   - python-virtualenv
+   - python-mysqldb
+- name: start apache2
+  service: name=apache2 state=started enabled=yes
+  become: true
+- name: enable apache2 WSGI module
+  apache2_module: name=wsgi state=present
+  notify: restart apache2
+  become: true
+- name: copy apache conf
+  copy: src=demo/demo_apache.conf dest=/etc/apache2/sites-available mode=0755
+  become: true
+  notify: restart apache2
+- name: setup python virtualenv
+  pip: requirements=/var/www/demo/requirements.txt virtualenv=/var/www/demo/.venv
+  become: true
+  notify: restart apache2
+- name: deactivate default apache site
+  file: path=/etc/apache2/sites-enabled/000-default.conf state=absent
+  become: true
+  notify: restart apache2
+- name: activate demo app apache2 site
+  file: src=/etc/apache2/sites-available/demo_apache.conf dest=/etc/apache2/sites-enabled/demo_apache.conf state=link
+  become: true
+  notify: restart apache2

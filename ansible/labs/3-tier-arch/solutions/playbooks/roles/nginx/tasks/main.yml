@@ -1,2 +1,20 @@
 ---
 # tasks file for nginx
+- name: install nginx
+  apt: name=nginx state=present update_cache=true
+  become: true
+- name: start nginx
+  service: name=nginx state=started enabled=yes
+  become: true
+- name: configure nginx
+  template: src=roles/nginx/templates/nginx.conf.j2 dest=/etc/nginx/sites-available/demo mode=0644
+  notify: restart nginx
+  become: true
+- name: deactivate default nginx site
+  file: path=/etc/nginx/sites-enabled/default state=absent
+  notify: restart nginx
+  become: true
+- name: activate demo nginx site
+  file: src=/etc/nginx/sites-available/demo dest=/etc/nginx/sites-enabled/demo state=link
+  notify: restart nginx
+  become: true
