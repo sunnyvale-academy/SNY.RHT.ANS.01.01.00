@@ -1,6 +1,22 @@
 ---
 # tasks file for demo_app
+- name: copy demo app source
+  copy: src=roles/demo_app/files/demo/app/ dest=/var/www/demo mode=0755
+  become: true
+  notify: restart apache2
 - name: copy apache conf
-  copy: src=demo/demo_apache.conf dest=/etc/apache2/sites-available mode=0755
+  copy: src=roles/demo_app/files/demo_apache.conf dest=/etc/apache2/sites-available mode=0755
+  become: true
+  notify: restart apache2
+- name: setup python virtualenv
+  pip: requirements=/var/www/demo/requirements.txt virtualenv=/var/www/demo/.venv
+  become: true
+  notify: restart apache2
+- name: deactivate default apache site
+  file: path=/etc/apache2/sites-enabled/000-default.conf state=absent
+  become: true
+  notify: restart apache2
+- name: activate demo app apache2 site
+  file: src=/etc/apache2/sites-available/demo_apache.conf dest=/etc/apache2/sites-enabled/demo_apache.conf state=link
   become: true
   notify: restart apache2
