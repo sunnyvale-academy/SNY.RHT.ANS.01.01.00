@@ -10,3 +10,6 @@ app02
 
 [database]
 db01
+
+[docker]
+docker01
