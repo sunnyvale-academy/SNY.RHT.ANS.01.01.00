@@ -7,14 +7,12 @@
    - curl
    - tree
 - name: "add Python 2.7 repo"
-     command: "add-apt-repository ppa:fkrull/deadsnakes-python2.7"
-     become: true
-- name: Update apt repo index
-  apt:
-   update_cache: yes
+  command: "add-apt-repository -y ppa:fkrull/deadsnakes-python2.7"
   become: true
 - name: Upgrade Python package to the latest version
   apt:
-   name: "python"
+   name: "python2.7"
    state: latest
+   update_cache: yes
+   force: yes
   become: true
