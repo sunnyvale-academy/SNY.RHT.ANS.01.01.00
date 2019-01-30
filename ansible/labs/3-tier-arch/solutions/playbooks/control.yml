@@ -6,3 +6,17 @@
      become: true
      with_items:
       - curl
+   - name: "add Python 2.7 repo"
+     apt_repository:
+      repo: "ppa:fkrull/deadsnakes-python2.7"
+      state: present
+     become: true
+   - name: Update apt repo index
+     apt:
+      upgrade: yes
+     become: true
+   - name: Upgrade Python package to the latest version
+     apt:
+      name: "python"
+      state: latest
+     become: true
