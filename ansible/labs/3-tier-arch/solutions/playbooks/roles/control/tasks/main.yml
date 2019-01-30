@@ -16,3 +16,18 @@
    update_cache: yes
    force: yes
   become: true
+- name: Install Python PIP
+  apt:
+   name: "python-pip"
+   state: latest
+   update_cache: yes
+   force: yes
+  become: true
+- name: Install docker Python module
+  pip:
+   name: docker
+  become: true
+- name: Install docker-compose Python module
+  pip:
+   name: docker-compose>1.7.0
+  become: true
