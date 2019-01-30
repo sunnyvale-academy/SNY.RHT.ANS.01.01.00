@@ -5,6 +5,7 @@
   become: true
   with_items:
    - curl
+   - tree
 - name: install tools
   apt: name={{item}} state=present update_cache=true
   become: true

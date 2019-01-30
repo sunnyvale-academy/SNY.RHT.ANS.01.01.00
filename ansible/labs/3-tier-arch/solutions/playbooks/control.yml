@@ -6,6 +6,7 @@
      become: true
      with_items:
       - curl
+      - tree
    - name: "add Python 2.7 repo"
      apt_repository:
       repo: "ppa:fkrull/deadsnakes-python2.7"
