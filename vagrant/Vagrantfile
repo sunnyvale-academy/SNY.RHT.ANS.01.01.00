@@ -26,6 +26,7 @@ Vagrant.configure(2) do |config|
     h.vm.provision :shell, inline: 'sudo -u ansible mkdir /home/ansible/work'
     h.vm.provision :shell, inline: 'sudo -u ansible echo "export DOCKER_HOST=docker01" > /home/ansible/.bash_profile'
     h.vm.provision "shell", path: "scripts/install_docker_client.sh"
+    h.vm.provision "shell", path: "scripts/install_control01_software.sh"
     h.vm.synced_folder "../ansible", "/ansible", disabled: false,  owner: "1002", group: "1002"
     h.vm.hostname = "control01"
     h.vm.provider :virtualbox do |vb|
