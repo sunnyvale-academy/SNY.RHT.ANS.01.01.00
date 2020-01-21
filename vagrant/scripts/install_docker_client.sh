@@ -1,1 +1,2 @@
-sudo cp /home/ansible/git/SNY.OSS.ANS.01.01.00/utilities/docker /usr/bin
+. /vagrant/scripts/.env
+sudo cp /home/ansible/git/$GIT_REPO_NAME/utilities/docker /usr/bin

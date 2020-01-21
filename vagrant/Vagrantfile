@@ -29,6 +29,7 @@ Vagrant.configure(2) do |config|
     h.vm.provision "shell", path: "scripts/install_docker.sh"
     h.vm.provision "shell", path: "scripts/install_control01_software.sh"
     h.vm.synced_folder "../ansible", "/ansible", disabled: false,  owner: "1002", group: "1002"
+    h.vm.synced_folder "../", "/usr/src/git_repo"
     h.vm.hostname = "control01"
     h.vm.provider :virtualbox do |vb|
         vb.name = "control01"
