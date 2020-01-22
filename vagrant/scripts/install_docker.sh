@@ -16,7 +16,7 @@ sudo add-apt-repository \
 
 sudo apt-get update
 
-sudo apt-get install docker-ce -y
+sudo apt-get install docker-ce=18.06.1~ce~3-0~ubuntu -y
 
 sudo usermod -aG docker ansible
 
