@@ -1,0 +1,7 @@
+---
+- name: Install nginx
+  hosts: all
+  tasks:
+   - name: Install base packages
+     apt: name=nginx state=installed
+     become: true
