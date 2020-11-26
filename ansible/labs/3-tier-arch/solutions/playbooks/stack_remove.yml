@@ -1,0 +1,65 @@
+---
+- hosts: loadbalancer
+  become: true
+  tasks:
+   - name: stop nginx
+     service: name=nginx state=stopped enabled=yes
+     become: true
+   - name: remove nginx
+     apt: name=nginx purge=yes state=absent update_cache=true
+     become: true
+   - name: remove nginx-full
+     apt: name=nginx-full purge=yes state=absent update_cache=true
+     become: true
+   - name: remove nginx-common
+     apt: name=nginx-common purge=yes state=absent update_cache=true
+     become: true
+   #- name: remove nginx conf
+   #  file: dest=/etc/nginx state=absent
+   #  become: true
+- hosts: webserver
+  become: true
+  tasks:
+   - name: stop apache2
+     service: name=apache2 state=stopped enabled=yes
+     become: true
+   - name: remove apache2
+     apt: name={{item}} purge=yes state=absent update_cache=true
+     become: true
+     with_items:
+      - apache2
+      - libapache2-mod-wsgi
+      - python-pip
+      - python-virtualenv
+      - python-mysqldb
+      - apache2-utils 
+      - apache2-common
+      - apache2-bin
+      - apache2-data
+      - apache2-doc 
+      - apache2-suexec-pristine 
+      - apache2-suexec-custom 
+      - apache2-utils
+     
+   - name: remove demo app
+     file: dest=/var/www/demo state=absent
+     become: true
+   - name: remove apache2 conf
+     file: dest=/etc/apache2 state=absent
+     become: true
+- hosts: database
+  become: true
+  tasks: 
+   - name: stop mysql-server
+     service: name=mysql state=stopped enabled=true
+     become: true
+   - name: remove mysql-server
+     apt: name=mysql-server purge=yes state=absent update_cache=true
+     become: true
+   - name: remove mysql-common
+     apt: name=mysql-common purge=yes state=absent update_cache=true
+     become: true
+   - name: remove mysql-server conf
+     file: dest=/etc/mysql state=absent
+     become: true
+   
