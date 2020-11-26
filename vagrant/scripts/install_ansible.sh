@@ -1,4 +1,9 @@
-sudo apt-get install software-properties-common
-sudo apt-add-repository --yes ppa:ansible/ansible-2.9
+sudo apt-get install --yes software-properties-common
+sudo add-apt-repository -r --yes ppa:ansible/ansible
+sudo add-apt-repository --yes ppa:ansible/ansible-2.9
 sudo apt-get update
-sudo apt-get install ansible --yes --force-yes
+sudo apt-get install --yes ansible
+sudo apt-get upgrade --yes ansible
+
+
+
