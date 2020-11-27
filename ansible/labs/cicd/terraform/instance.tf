@@ -8,7 +8,7 @@ resource "google_compute_instance" "default" {
  name         = "my-vm-${random_id.instance_id.hex}"
  machine_type = "f1-micro"
  zone         = "${var.REGION}"
- tags          = ["ssh","http"];
+ tags          = ["ssh","http"]
 
 
  // Create the Ansible inventory locally using the local-exec provisioner 
