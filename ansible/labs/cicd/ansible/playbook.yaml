@@ -3,5 +3,5 @@
   hosts: all
   tasks:
    - name: Install base packages
-     apt: name=nginx state=installed
+     apt: name=nginx state=latest
      become: true

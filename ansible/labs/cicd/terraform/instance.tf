@@ -11,9 +11,9 @@ resource "google_compute_instance" "default" {
 
 
  // Create the Ansible inventory locally using the local-exec provisioner 
- provisioner "local-exec" {
+ /*provisioner "local-exec" {
     command = "echo '[all]' > inventory.txt && echo ${google_compute_instance.default.network_interface.0.access_config.0.nat_ip} >> inventory.txt"
- }
+ }*/
 
  
 
