@@ -2,12 +2,12 @@
 - name: Install nginx
   hosts: all
   tasks:
-   - name: Install nginx
-     apt: name=nginx state=latest
+  # - name: Install nginx
+  #   apt: name=nginx state=latest
+  #   become: true
+   - name: Remove nginx
+     apt: name=nginx state=absent
      become: true
-  # - name: Remove nginx
-  #   apt: name=nginx state=absent
-  #   become: true
-  # - name: Install apache2
-  #   apt: name=apache2 state=latest
-  #   become: true
+   - name: Install apache2
+     apt: name=apache2 state=latest
+     become: true
