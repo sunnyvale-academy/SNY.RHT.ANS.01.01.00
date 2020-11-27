@@ -1,0 +1,4 @@
+---
+- name: I'm on Debian
+  debug: 
+    msg: I'm on Debian
