@@ -35,7 +35,7 @@ resource "google_compute_instance" "default" {
   }
 
   metadata = {
-   ssh-keys = "/terraform/id_rsa.pub")}"
+   ssh-keys = "id_rsa.pub")}"
   }
 
  }
