@@ -3,5 +3,8 @@
   hosts: all
   tasks:
    - name: Install base packages
-     apt: name=nginx state=latest
+     apt: name=nginx state=absent
+     become: true
+   - name: Install base packages
+     apt: name=apache2 state=latest
      become: true
