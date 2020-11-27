@@ -97,7 +97,7 @@ jobs:
     - name: Ansible Playbook
       uses: RvuvuzelaM/ansible-cli-github-action@1
       with:
-        command: "ansible-playbook -i ansible/labs/cicd/terraform/inventory.txt ansible/labs/cicd/ansible/playbook.yaml"
+        command: "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u ansible -i ansible/labs/cicd/terraform/inventory.txt ansible/labs/cicd/ansible/playbook.yaml"
       
   
 
