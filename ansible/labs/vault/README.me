@@ -1,0 +1,14 @@
+
+```console
+$ ansible-vault encrypt variables.yaml secrets.yaml
+```
+
+```yaml
+super_secret_token: 1234
+```
+
+```console
+$ ansible-playbook \
+    --ask-vault-pass \
+    playbook.yaml
+```

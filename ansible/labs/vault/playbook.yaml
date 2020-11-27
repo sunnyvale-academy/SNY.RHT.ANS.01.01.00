@@ -1,0 +1,8 @@
+- hosts: localhost
+  vars_files:
+    - secrets.yaml
+  vars: 
+    - super_secret_token: "{{ vault_super_secret_token}}"
+  tasks:
+    - debug:
+        msg: "{{ super_secret_token }}"

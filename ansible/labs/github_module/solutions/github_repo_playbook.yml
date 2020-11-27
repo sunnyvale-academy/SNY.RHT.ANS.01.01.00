@@ -1,6 +1,6 @@
 - hosts: localhost
   vars_files:
-    - vault
+    - secrets.yaml
   vars: 
     - github_token: "{{ vault_github_token }}"
     - username: "{{ username }}"
@@ -10,18 +10,18 @@
     #  github_repo:
     #  register: result
     - debug:
-       msg: "{{ github_token }}"
-    #- name: "Create a github Repo"
-    #  github_repo:
-    #    github_auth_key: "{{ github_token }}"
-    #    name: "{{ repo_name }}"
-    #    description: "Repo {{ repo_name }} created by Ansible"
-    #    private: yes
-    #    has_issues: no
-    #    has_wiki: no
-    #    has_downloads: no
-    #    state: present
-    #  register: result
+        msg: "{{ github_token }}"
+    - name: "Create a github Repo"
+      github_repo:
+        github_auth_key: "{{ github_token }}"
+        name: "{{ repo_name }}"
+        description: "Repo {{ repo_name }} created by Ansible"
+        private: yes
+        has_issues: no
+        has_wiki: no
+        has_downloads: no
+        state: present
+      register: result
 
     - name: Delete that repo 
       github_repo:
