@@ -94,13 +94,14 @@ jobs:
       env: 
         GOOGLE_CREDENTIALS: ${{ secrets.TF_API_TOKEN }}
     
-    - name: Setup Ansible
+    - name: Ansible Playbook
       # You may pin to the exact commit or the version.
       # uses: ansible/ansible-lint-action@38e9ebdc9c3c71e66e2a3e0a09f0b6c8bc005e46
       uses: ansible/ansible-lint-action@v4.1.0.post0
       with: 
         targets: |
           ansible/labs/cicd/ansible/playbook.yaml  
+        inventory: ansible/labs/cicd/terraform/inventory.txt
 
     
   
