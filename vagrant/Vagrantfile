@@ -18,6 +18,8 @@ Vagrant.configure(2) do |config|
   config.vm.boot_timeout = 1800 # 30 minutes
   config.vm.define "control01", primary: true do |h|
     h.vm.network "private_network", ip: "192.168.135.10"
+    h.vm.provision "shell", inline: "sudo apt-get install -y dos2unix"
+    h.vm.provision "shell", inline: "find /usr/src/git_repo/vagrant/scripts -type f -print0 | xargs -0 dos2unix"
     h.vm.provision "shell", path: "scripts/add_ansible_user.sh" 
     h.vm.provision "shell", path: "scripts/generate_ansible_ssh_keys.sh" 
     h.vm.provision "shell", path: "scripts/install_ansible.sh" 
