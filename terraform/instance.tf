@@ -15,10 +15,7 @@ resource "google_compute_instance" "default" {
     command = "echo '[all]' > inventory.txt && echo ${google_compute_instance.default.network_interface.0.access_config.0.nat_ip} >> inventory.txt"
  }
 
- // Provision using Ansible with local-exec provisioner
- provisioner "local-exec" {
-    command = "sleep 40; ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u ${var.VM_USERNAME} --private-key ~/.ssh/id_rsa -i inventory.txt ../playbooks/ansible-playbook.yml" 
- }
+ 
 
  boot_disk {
    initialize_params {
