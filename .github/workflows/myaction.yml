@@ -93,6 +93,9 @@ jobs:
       run: cd ansible/labs/cicd/terraform && terraform apply -auto-approve
       env: 
         GOOGLE_CREDENTIALS: ${{ secrets.TF_API_TOKEN }}
+
+    - name: Terraform populate inventory
+      run: cd ansible/labs/cicd/terraform && echo '[all]' > inventory.txt && terraform output ip  >> inventory.txt 
     
     - name: Ansible Playbook
       uses: RvuvuzelaM/ansible-cli-github-action@1
