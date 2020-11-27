@@ -72,7 +72,7 @@ jobs:
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
-      run: cd terraform && terraform init
+      run: cd ansible/labs/cicd/terraform && terraform init
       env: 
         GOOGLE_CREDENTIALS: ${{ secrets.TF_API_TOKEN }}
 
@@ -82,7 +82,7 @@ jobs:
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
-      run: cd terraform && terraform plan
+      run: cd ansible/labs/cicd/terraform && terraform plan
       env: 
         GOOGLE_CREDENTIALS: ${{ secrets.TF_API_TOKEN }}
 
@@ -90,12 +90,12 @@ jobs:
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Apply
       #if: github.ref == 'refs/heads/master' && github.event_name == 'push'
-      run: cd terraform && terraform apply -auto-approve
+      run: cd ansible/labs/cicd/terraform && terraform apply -auto-approve
       env: 
         GOOGLE_CREDENTIALS: ${{ secrets.TF_API_TOKEN }}
    
-    #- name: ansible-lint
-    #  # You may pin to the exact commit or the version.
-    #  # uses: ansible/ansible-lint-action@38e9ebdc9c3c71e66e2a3e0a09f0b6c8bc005e46
-    #  uses: ansible/ansible-lint-action@v4.1.0.post0
-    #  run: ansible 
+    - name: ansible-lint
+      # You may pin to the exact commit or the version.
+      # uses: ansible/ansible-lint-action@38e9ebdc9c3c71e66e2a3e0a09f0b6c8bc005e46
+      uses: ansible/ansible-lint-action@v4.1.0.post0
+      run: ansible-playbook -i inventory.txt ansible/labs/cicd/ansible/playbook.yaml
