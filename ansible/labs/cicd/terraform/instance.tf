@@ -41,3 +41,15 @@ resource "google_compute_instance" "default" {
 output "ip" {
     value = "${google_compute_instance.default.network_interface.0.access_config.0.nat_ip}"
 }
+
+
+resource "null_resource" "populate_inventory" {
+  
+  triggers = {
+    always_run = "${timestamp()}"
+  }
+
+  provisioner "local-exec" {
+        command = "echo '[all]' > inventory.txt && echo ${google_compute_instance.default.network_interface.0.access_config.0.nat_ip} >> inventory.txt"
+  }
+}

@@ -94,8 +94,8 @@ jobs:
       env: 
         GOOGLE_CREDENTIALS: ${{ secrets.TF_API_TOKEN }}
 
-    - name: Terraform populate inventory
-      run: cd ansible/labs/cicd/terraform && echo '[all]' > inventory.txt && terraform output ip  >> inventory.txt 
+    #- name: Terraform populate inventory
+    #  run: cd ansible/labs/cicd/terraform && echo '[all]' > inventory.txt && terraform output ip  >> inventory.txt 
     
     - name: Ansible Playbook
       uses: RvuvuzelaM/ansible-cli-github-action@1
