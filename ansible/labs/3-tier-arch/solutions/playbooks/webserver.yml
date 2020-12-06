@@ -11,6 +11,9 @@
       - python-virtualenv
       - python-mysqldb
       - python3-pymysql
+      - python3-venv
+      - python3-virtualenv
+      - python3-pip
    - name: start apache2
      service: name=apache2 state=started enabled=yes
      become: true
@@ -27,7 +30,7 @@
      become: true
      notify: restart apache2
    - name: setup python virtualenv
-     pip: requirements=/var/www/demo/requirements.txt virtualenv=/var/www/demo/.venv
+     pip: requirements=/var/www/demo/requirements.txt virtualenv=/var/www/demo/.venv virtualenv_python=python
      become: true
      notify: restart apache2
    - name: deactivate default apache site
