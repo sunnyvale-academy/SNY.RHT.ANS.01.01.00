@@ -39,6 +39,10 @@ Vagrant.configure(2) do |config|
     h.vm.hostname = "control01"
     h.vm.provider :virtualbox do |vb|
         vb.name = "control01"
+        vb.memory = "1024"
+        vb.customize ["modifyvm", :id, "--uart1", "0x3F8", "4"]
+        vb.customize ["modifyvm", :id, "--uartmode1", "file", File::NULL]
+        vb.customize ["modifyvm", :id, "--nestedpaging", "off"]
     end
   end
 
@@ -49,6 +53,10 @@ Vagrant.configure(2) do |config|
     h.vm.hostname = "lb01"
     h.vm.provider :virtualbox do |vb|
         vb.name = "lb01"
+        vb.memory = "1024"
+        vb.customize ["modifyvm", :id, "--uart1", "0x3F8", "4"]
+        vb.customize ["modifyvm", :id, "--uartmode1", "file", File::NULL]
+        vb.customize ["modifyvm", :id, "--nestedpaging", "off"]
     end
   end
 
@@ -59,6 +67,10 @@ Vagrant.configure(2) do |config|
     h.vm.hostname = "app01"
     h.vm.provider :virtualbox do |vb|
         vb.name = "app01"
+        vb.memory = "1024"
+        vb.customize ["modifyvm", :id, "--uart1", "0x3F8", "4"]
+        vb.customize ["modifyvm", :id, "--uartmode1", "file", File::NULL]
+        vb.customize ["modifyvm", :id, "--nestedpaging", "off"]
     end
   end
 
@@ -69,6 +81,10 @@ Vagrant.configure(2) do |config|
     h.vm.hostname = "app02"
     h.vm.provider :virtualbox do |vb|
         vb.name = "app02"
+        vb.memory = "1024"
+        vb.customize ["modifyvm", :id, "--uart1", "0x3F8", "4"]
+        vb.customize ["modifyvm", :id, "--uartmode1", "file", File::NULL]
+        vb.customize ["modifyvm", :id, "--nestedpaging", "off"]
     end
   end
 
@@ -79,6 +95,10 @@ Vagrant.configure(2) do |config|
     h.vm.hostname = "db01"
     h.vm.provider :virtualbox do |vb|
         vb.name = "db01"
+        vb.memory = "1024"
+        vb.customize ["modifyvm", :id, "--uart1", "0x3F8", "4"]
+        vb.customize ["modifyvm", :id, "--uartmode1", "file", File::NULL]
+        vb.customize ["modifyvm", :id, "--nestedpaging", "off"]
     end
   end
 
