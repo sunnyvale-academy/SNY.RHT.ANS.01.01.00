@@ -40,7 +40,9 @@
       - apache2-suexec-pristine 
       - apache2-suexec-custom 
       - apache2-utils
-     
+      - python3-pymysql
+      - python3-pip
+      - python3-virtualenv
    - name: remove demo app
      file: dest=/var/www/demo state=absent
      become: true

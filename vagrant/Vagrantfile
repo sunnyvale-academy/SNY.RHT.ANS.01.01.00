@@ -4,9 +4,10 @@
 # README
 #
 # Getting Started:
-# 1. vagrant plugin install vagrant-hostmanager
-# 2. vagrant up
-# 3. vagrant ssh
+# $ vagrant plugin install vagrant-hostmanager
+# $ vagrant plugin install vagrant-vbguest
+# $ vagrant up
+# $ vagrant ssh control01
 #
 # This should put you at the control host
 #  with access, by name, to other vms
