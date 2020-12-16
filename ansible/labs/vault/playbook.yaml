@@ -1,8 +1,22 @@
 - hosts: localhost
   vars_files:
     - secrets.yaml
-  vars: 
-    - super_secret_token: "{{ vault_super_secret_token}}"
+    - passwords.yaml
+  vars:
+    - my_password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          64613861663265363232356538653430653833646637306466343663313034323761353131616133
+          3664623734363339363766666636393065656237373236620a613864356634653238336532626132
+          62373035636436623961616538316430323265383739656561653261633263336639366362366130
+          3937643633313035370a663533643662663262626466656434306436393239623033353038376663
+          6338
   tasks:
-    - debug:
+    - name: print super_secret_token
+      debug:
         msg: "{{ super_secret_token }}"
+    - name: print password
+      debug:
+        msg: "{{ password }}"
+    - name: print my_password
+      debug:
+        msg: "{{ my_password }}"
