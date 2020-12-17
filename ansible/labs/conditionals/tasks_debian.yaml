@@ -5,8 +5,8 @@
 #- name: Update repo
 #  command: apt-get update 
 #  become: yes
-- name: Upgrade system
-  apt: 
-    upgrade: dist
-    update_cache: yes
-  become: yes
+#- name: Upgrade system
+#  apt: 
+#    upgrade: dist
+#    update_cache: yes
+#  become: yes

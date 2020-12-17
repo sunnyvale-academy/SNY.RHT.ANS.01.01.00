@@ -1,8 +1,8 @@
 - hosts: localhost
-  vars_files:
-    - secrets.yaml
+  #vars_files:
+  #  - secrets.yaml
   vars: 
-    - github_token: "{{ vault_github_token }}"
+    - github_token: "{{ github_token }}"
     - username: "{{ username }}"
     - repo_name: "{{ repo_name }}"
   tasks:
@@ -23,17 +23,17 @@
         state: present
       register: result
 
-    - name: Delete that repo 
-      github_repo:
-        github_auth_key: "{{ github_token }}"
-        name: "{{ repo_name }}"
-        state: absent
-        username: "{{ username }}"
-        private: yes
-        has_issues: no
-        has_wiki: no
-        has_downloads: no
-      register: result
+    #- name: Delete that repo 
+    #  github_repo:
+    #    github_auth_key: "{{ github_token }}"
+    #    name: "{{ repo_name }}"
+    #    state: absent
+    #    username: "{{ username }}"
+    #    private: yes
+    #    has_issues: no
+    #    has_wiki: no
+    #    has_downloads: no
+    #  register: result
 
     #- debug: var=result
 

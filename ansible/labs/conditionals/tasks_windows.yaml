@@ -1,4 +1,4 @@
 ---
-- name: I'm on Debian
+- name: I'm on Windows
   debug: 
-    msg: I'm on Debian
+    msg: I'm on Windows
