@@ -1,0 +1,65 @@
+---
+- hosts: webserver
+  tasks:
+   - name: install apache2
+     apt: name={{item}} state=present update_cache=true
+     become: true
+     with_items:
+      - apache2
+      - libapache2-mod-wsgi
+      - python-pip
+      - python-virtualenv
+      - python-mysqldb
+      - python3-pymysql
+      - python3-venv
+      - python3-virtualenv
+      - python3-pip
+     tags:
+      - install
+   - name: start apache2
+     service: name=apache2 state=started enabled=yes
+     become: true
+     tags:
+      - run
+   - name: enable apache2 WSGI module
+     apache2_module: name=wsgi state=present
+     notify: restart apache2
+     become: true
+     tags:
+      - configure
+   - name: copy demo app source
+     copy: src=demo/app/ dest=/var/www/demo mode=0755
+     become: true
+     notify: restart apache2
+     tags:
+      - install
+   - name: copy apache conf
+     copy: src=demo/demo_apache.conf dest=/etc/apache2/sites-available mode=0755
+     become: true
+     notify: restart apache2
+     tags:
+      - configure
+   - name: setup python virtualenv
+     pip: requirements=/var/www/demo/requirements.txt virtualenv=/var/www/demo/.venv virtualenv_python=python
+     become: true
+     notify: restart apache2
+     tags:
+      - configure
+   - name: deactivate default apache site
+     file: path=/etc/apache2/sites-enabled/000-default.conf state=absent
+     become: true 
+     notify: restart apache2
+     tags:
+      - configure
+   - name: activate demo app apache2 site
+     file: src=/etc/apache2/sites-available/demo_apache.conf dest=/etc/apache2/sites-enabled/demo_apache.conf state=link
+     become: true
+     notify: restart apache2
+     tags:
+      - configure
+  handlers: 
+   - name: restart apache2
+     service: name=apache2 state=restarted
+     become: true
+     tags:
+      - run
