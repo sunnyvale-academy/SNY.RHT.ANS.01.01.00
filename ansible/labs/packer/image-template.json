@@ -1,0 +1,28 @@
+{
+    "description": "My VM image",
+    "variables": {
+      "project_id": "sny-prg-dvs-01-01-00",
+      "zone": "europe-west1-b",
+      "base_image": "debian-9",
+      "image_name": "my-debian-image-with-nginx"
+    },
+	"builders": [
+		{
+			"type": "googlecompute",
+            "account_file": "credentials.json",
+            "project_id": "{{user `project_id`}}",
+            "source_image_family": "{{user `base_image`}}",
+            "zone": "{{user `zone`}}",
+            "ssh_username": "ubuntu",
+            "name": "{{user `image_name`}}",
+            "image_name": "{{user `image_name`}}"
+		}
+	],
+	"provisioners": [
+        {
+            "type": "ansible",
+            "playbook_file": "playbook.yaml",
+            "ansible_env_vars": [ "ALLOW_WORLD_READABLE_TMPFILES=True" ]
+        }
+	]
+}
