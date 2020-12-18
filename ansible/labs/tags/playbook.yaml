@@ -55,8 +55,8 @@
      file: src=/etc/apache2/sites-available/demo_apache.conf dest=/etc/apache2/sites-enabled/demo_apache.conf state=link
      become: true
      notify: restart apache2
-     tags:
-      - configure
+     #tags:
+     # - configure
   handlers: 
    - name: restart apache2
      service: name=apache2 state=restarted
