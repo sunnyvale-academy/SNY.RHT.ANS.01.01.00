@@ -1,0 +1,1 @@
+sudo bash -c 'cat /vagrant/hosts.txt >> /etc/hosts'
