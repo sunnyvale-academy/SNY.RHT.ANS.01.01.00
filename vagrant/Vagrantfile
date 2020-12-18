@@ -46,6 +46,9 @@ Vagrant.configure(2) do |config|
         vb.customize ["modifyvm", :id, "--uartmode1", "file", File::NULL]
         vb.customize ["modifyvm", :id, "--nestedpaging", "off"]
     end
+    h.vm.provider :libvirt do |v|
+      v.memory = 1024
+    end
   end
 
   config.vm.define "lb01" do |h|
@@ -60,6 +63,9 @@ Vagrant.configure(2) do |config|
         vb.customize ["modifyvm", :id, "--uart1", "0x3F8", "4"]
         vb.customize ["modifyvm", :id, "--uartmode1", "file", File::NULL]
         vb.customize ["modifyvm", :id, "--nestedpaging", "off"]
+    end
+    h.vm.provider :libvirt do |v|
+      v.memory = 512
     end
   end
 
@@ -76,6 +82,9 @@ Vagrant.configure(2) do |config|
         vb.customize ["modifyvm", :id, "--uartmode1", "file", File::NULL]
         vb.customize ["modifyvm", :id, "--nestedpaging", "off"]
     end
+    h.vm.provider :libvirt do |v|
+      v.memory = 512
+    end
   end
 
   config.vm.define "app02" do |h|
@@ -90,6 +99,9 @@ Vagrant.configure(2) do |config|
         vb.customize ["modifyvm", :id, "--uart1", "0x3F8", "4"]
         vb.customize ["modifyvm", :id, "--uartmode1", "file", File::NULL]
         vb.customize ["modifyvm", :id, "--nestedpaging", "off"]
+    end
+    h.vm.provider :libvirt do |v|
+      v.memory = 512
     end
   end
 
@@ -106,6 +118,9 @@ Vagrant.configure(2) do |config|
         vb.customize ["modifyvm", :id, "--uartmode1", "file", File::NULL]
         vb.customize ["modifyvm", :id, "--nestedpaging", "off"]
     end
+    h.vm.provider :libvirt do |v|
+      v.memory = 512
+    end
   end
 
   config.vm.define "docker01" do |h|
@@ -120,6 +135,9 @@ Vagrant.configure(2) do |config|
         vb.customize ["modifyvm", :id, "--uart1", "0x3F8", "4"]
         vb.customize ["modifyvm", :id, "--uartmode1", "file", File::NULL]
         vb.customize ["modifyvm", :id, "--nestedpaging", "off"]
+    end
+    h.vm.provider :libvirt do |v|
+      v.memory = 512
     end
   end
 
