@@ -1,0 +1,13 @@
+---
+- hosts: control01
+  vars:
+  - myvar: "{{force_install}}"
+  tasks:
+  - name: set fact force_install to yes
+    set_fact: force_install=yes
+  - name: display fact in playbook.yaml
+    debug: 
+      msg: "{{myvar}}"
+  - name: include another playbook
+    include_tasks: playbook1.yaml
+      

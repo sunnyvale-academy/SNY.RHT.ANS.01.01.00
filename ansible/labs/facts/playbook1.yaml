@@ -1,0 +1,6 @@
+---
+- name: display fact in playbook1.yaml
+  debug: 
+    msg: "{{force_install}}"
+
+      
