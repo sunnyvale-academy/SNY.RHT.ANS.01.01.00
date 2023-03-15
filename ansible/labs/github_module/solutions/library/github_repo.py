@@ -99,7 +99,7 @@ def main():
         if not is_error:
                 module.exit_json(changed=has_changed, meta=result)
         else:
-                module.fail_json(msg="Error deleting repo", meta=result)
+                module.fail_json(msg="Error managing repo", meta=result)
 
 if __name__ == '__main__':
     main()
