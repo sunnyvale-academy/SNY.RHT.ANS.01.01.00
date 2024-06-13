@@ -28,4 +28,6 @@ sudo update-rc.d docker defaults
 
 sudo bash -c 'cat /vagrant/docker.service > /lib/systemd/system/docker.service'
 
+sudo systemctl daemon-reload
+
 service docker restart
