@@ -26,4 +26,6 @@ sudo echo "DOCKER_OPTS=\"-H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock\""
 
 sudo update-rc.d docker defaults
 
+sudo bash -c 'cat /vagrant/docker.service > /lib/systemd/system/docker.service'
+
 service docker restart
